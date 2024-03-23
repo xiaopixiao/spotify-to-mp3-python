@@ -43,16 +43,16 @@ def write_tracks(text_file: str, tracks: dict):
 
 
 def write_playlist(username: str, playlist_id: str):
-    results = spotify.user_playlist(username, playlist_id, fields='tracks,next,name')
+    results = spotify.playlist(playlist_id)
     playlist_name = results['name']
     text_file = u'{0}.txt'.format(playlist_name, ok='-_()[]{}')
     print(u'Writing {0} tracks to {1}.'.format(results['tracks']['total'], text_file))
     tracks = results['tracks']
     write_tracks(text_file, tracks)
 
-    imgURLs = [];
+    imgURLs = []
     for item in tracks['items']:
-        imgURLs.append(item['track']['album']['images'][0]['url']);
+        imgURLs.append(item['track']['album']['images'][0]['url'])
     return playlist_name, imgURLs
 
 def find_and_download_songs(reference_file: str):
@@ -228,10 +228,10 @@ def enable_multicore(autoenable=False, maxcores=None, buffercores=1):
 if __name__ == "__main__":
     # Parameters
     print("Please read README.md for use instructions.")
-    client_id = input("Client ID: ")
-    client_secret = input("Client secret: ")
-    username = input("Spotify username: ")
-    playlist_uri = input("Playlist URI/Link: ")
+    client_id = "e71d0773e7fb4f2b9c7bf4e93c8c1605"
+    client_secret = "c83b33a3a87c450687c8b993b6f55a97"
+    username = "zzy"
+    playlist_uri = "39OqO7Kha9ANuuNeH6rReb"
     if playlist_uri.find("https://open.spotify.com/playlist/") != -1:
         playlist_uri = playlist_uri.replace("https://open.spotify.com/playlist/", "")
     multicore_support = enable_multicore(autoenable=False, maxcores=None, buffercores=1)
